@@ -6,3 +6,44 @@ body {
   background-position-x:center;
   background-position-y:top;
 }
+h1, h2 {
+	text-align: center;
+	color: white;
+	margin: 10px 0;
+}
+form {
+	position: fixed;
+    bottom: 10px;
+	padding: 30px;
+    background: rgba(0,0,0, .3);
+    display: inline-block;
+    border-radius: 5px;
+}
+form label, form output {
+	display: inline-block;
+	width: 250px;
+	color: white;
+}
+form output {
+	display: inline;
+}
+form input, form textarea {
+	border: 1px solid black;
+	padding: 2px 5px;
+}
+form textarea {
+	display: block;
+	width: 80%;
+	margin: 20px auto;
+}
+form #giftAmount {
+	display: block;
+	width: 80%;
+	margin: 20px auto;
+}
+form button {
+	float: right;
+	padding: 4px 7px;
+	border: 1px solid black;
+	border-radius:  5px;
+}

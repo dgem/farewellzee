@@ -21,6 +21,7 @@
     </div>
     <div>
       <label for="giftAmount">How much would you like to give?</label>
+      <output id="amount">5.00</output>      
       <input id="giftAmount"
              type="range"
              min="0"
@@ -28,7 +29,7 @@
              step=".5"
              value="5.00"
              oninput="amount.value = Number(giftAmount.value).toFixed(2)" /> £
-      <output id="amount">5.00</output>
+
     </div>
     <div>
       <label for="message">Would you like to leave a message?</label>
