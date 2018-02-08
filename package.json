@@ -1,0 +1,14 @@
+{
+  "name": "fairwellzee",
+  "version": "0.0.1",
+  "description": "simple goodye to zee",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dan Murphy",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
