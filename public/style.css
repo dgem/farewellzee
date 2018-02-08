@@ -1,7 +1,8 @@
 
 body {
-  background-image:url('Zee.jpg');
+  background-image:url('zee.jpg');
   background-repeat:no-repeat;
-  background-size:contain;
-  background-position:center;
+  background-size:cover;
+  background-position-x:center;
+  background-position-y:top;
 }
