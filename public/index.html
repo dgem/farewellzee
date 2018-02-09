@@ -55,39 +55,38 @@
   var handler
   fetch('/key').then(resp =>
   {
-    var key = resp.text().then(value =>
+    var key = resp.text().then(key =>
     {
-      return value
-    });
-    console.log("key", key);
-    handler = StripeCheckout.configure(
-    {
-      key: key,
-      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-      locale: 'auto',
-      token: function(token)
+      console.log("key", key);
+      handler = StripeCheckout.configure(
       {
-        token.metadata = {
-          from: document.getElementById('displayName').value,
-          message: document.getElementById('message').value
-        }
-        console.log(JSON.stringify(token));
-        fetch("/charge",
-          {
-            method: "POST",
-            headers:
+        key: key,
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: 'auto',
+        token: function(token)
+        {
+          token.metadata = {
+            from: document.getElementById('displayName').value,
+            message: document.getElementById('message').value
+          }
+          console.log(JSON.stringify(token));
+          fetch("/charge",
             {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(token)
-          })
-          .then(output =>
-          {
-            console.log(JSON.stringify(output));
-            document.getElementById("input").classList.toggle('hidden');
-            document.getElementById("thanks").classList.toggle('hidden');
-          })
-      }
+              method: "POST",
+              headers:
+              {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(token)
+            })
+            .then(output =>
+            {
+              console.log(JSON.stringify(output));
+              document.getElementById("input").classList.toggle('hidden');
+              document.getElementById("thanks").classList.toggle('hidden');
+            })
+        }
+      });
     });
   });
 
