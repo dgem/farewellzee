@@ -1,49 +1,76 @@
-
 body {
-  background-image:url('zee.jpg');
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position-x:center;
-  background-position-y:top;
+  background-image: url('zee.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: top;
+  color: white
 }
+
 h1, h2 {
-	text-align: center;
-	color: white;
-	margin: 10px 0;
+  text-align: center;
+  color: white;
+  margin: .5em 0;
 }
+
 form {
-	position: fixed;
-    bottom: 10px;
-	padding: 30px;
-    background: rgba(0,0,0, .3);
-    display: inline-block;
-    border-radius: 5px;
+  /* position: fixed; */
+  width: 33%;
+  background: rgba(0, 0, 0, .3);
+  display: inline-block;
+  border-radius: .5em;
+  margin-bottom: 0;
+  margin-top: auto;
 }
-form label, form output {
-	display: inline-block;
-	width: 250px;
-	color: white;
+
+body div {
+  margin: 1em
 }
-form output {
-	display: inline;
+
+form label {
+  display: inline-block;
+  color: white;
 }
-form input, form textarea {
-	border: 1px solid black;
-	padding: 2px 5px;
+
+form span {
+  display: inline-block;
+  color: white;
+  float: right;
 }
+
+form input {
+  display: inline-block;
+  border-radius: .5em;
+}
+
+#displayName {
+  float: right;
+}
+
 form textarea {
-	display: block;
-	width: 80%;
-	margin: 20px auto;
+  display: block;
+  width: 90%;
+  margin: 1em auto;
+  border-radius: .5em;
+  float: right;
 }
+
 form #giftAmount {
-	display: block;
-	width: 80%;
-	margin: 20px auto;
+  display: block;
+  width: 80%;
+  margin: 20px auto;
 }
+
 form button {
-	float: right;
-	padding: 4px 7px;
-	border: 1px solid black;
-	border-radius:  5px;
+  float: right;
+  /* border: 1px solid black; */
+  border-radius: .5em;
+  margin-bottom: 1.5em;
+  margin-right: 1.5em;
+}
+
+@media (max-width: 350px) and (orientation: portrait) {
+  form {
+    width: 100%;
+  }
 }

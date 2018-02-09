@@ -11,37 +11,40 @@
 </head>
 
 <body class="background">
-  <h1>Farewell Zee</h1>
-  <h2>thanks for being awesome</h2>
-  <form id="input">
-    <div>
-      <label for="displayName">Your name, as you'd like it to appear?</label>
-      <input id="displayName"
-             type="text" />
-    </div>
-    <div>
-      <label for="giftAmount">How much would you like to give?</label>
-      <output id="amount">5.00</output>      
-      <input id="giftAmount"
-             type="range"
-             min="0"
-             max="25"
-             step=".5"
-             value="5.00"
-             oninput="amount.value = Number(giftAmount.value).toFixed(2)" /> £
+  <div>
+    <form id="input"
+          method="POST"
+          target="/sumit">
+      <h1>Farewell Zee,</h1>
+      <h2>thanks for being awesome!</h2>
+      <div>
+        <label for="displayName">What's your name?</label>
+        <input id="displayName"
+               type="text" />
+      </div>
+      <div>
+        <label for="message">What would you like to say to Zee?</label>
+        <textarea id="message"
+                  rows="5"></textarea>
+      </div>
+      <div>
+        <label for="giftAmount">How much are you gifting?</label>
+        <span class="text">£<output id="amount">3.00</output></span>
+        <input class="text"
+               id="giftAmount"
+               type="range"
+               min="0"
+               max="25"
+               step=".5"
+               value="2.50"
+               oninput="amount.value = Number(giftAmount.value).toFixed(2)" />
 
-    </div>
-    <div>
-      <label for="message">Would you like to leave a message?</label>
-      <textarea id="message"
-                rows="5"></textarea>
-    </div>
-    <button class="btn btn-primary btn-lg"
-            id="stripe-button">
-        Checkout <span class="glyphicon glyphicon-shopping-cart"></span>
+      </div>
+      <button class="btn btn-primary btn-lg"
+              id="stripe-button">Submit
       </button>
-  </form>
-
+    </form>
+  </div>
 </body>
 
 <script>
@@ -52,8 +55,29 @@
     locale: 'auto',
     token: function(token)
     {
-      // You can access the token ID with `token.id`.
-      // Get the token ID to your server-side code for use.
+      token.metadata = {
+        from: document.getElementById('displayName').value,
+        message: document.getElementById('message').value
+      }
+      console.log(JSON.stringify(token));
+      fetch("/charge",
+        {
+          method: "POST",
+          headers:
+          {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(token)
+        })
+        .then(output =>
+        {
+          console.log(JSON.stringify(output));
+          if (output.status === "succeeded")
+          {
+            console.log(output);
+            document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
+          }
+        })
     }
   });
 
@@ -61,14 +85,17 @@
 
   document.getElementById('stripe-button').addEventListener('click', function(e)
   {
-    console.log(document.getElementById('amount').value)
-    handler.open(
+    var amount = document.getElementById('amount').value
+    if (amount > 0)
     {
-      name: 'Zee\'s leaving collection',
-      description: 'for being an awesome meerkat',
-      currency: 'gbp',
-      amount: document.getElementById('amount').value * 100
-    });
+      handler.open(
+      {
+        name: 'Zee\'s leaving collection',
+        description: 'for being an awesome meerkat',
+        currency: 'gbp',
+        amount: amount * 100
+      });
+    }
     e.preventDefault();
   });
 
