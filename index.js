@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
-console.log("qwe3", process.env.STRIPE_KEY)
+console.log("qwe3", process.env.STRIPE_KEY);
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const app = express();
@@ -43,4 +43,4 @@ app.post("/charge", (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(process.env.PORT, () => console.log('Farewell Zee listening on', process.env.PORT))
