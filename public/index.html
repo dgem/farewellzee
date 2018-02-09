@@ -52,13 +52,12 @@
 </body>
 
 <script>
-  var handler
   fetch('/key').then(resp =>
   {
     var key = resp.text().then(key =>
     {
       console.log("key", key);
-      handler = StripeCheckout.configure(
+      var handler = StripeCheckout.configure(
       {
         key: key,
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -88,25 +87,27 @@
         }
       });
     });
-  });
-
-  document.getElementById('giftAmount').value = document.getElementById("amount").value
-
-  document.getElementById('stripe-button').addEventListener('click', function(e)
+  }).then(handler =>
   {
-    var amount = document.getElementById('amount').value
-    if (amount > 0)
+    document.getElementById('giftAmount').value = document.getElementById("amount").value
+    document.getElementById('stripe-button').addEventListener('click', function(e)
     {
-      handler.open(
+      var amount = document.getElementById('amount').value
+      if (amount > 0)
       {
-        name: 'Zee\'s leaving collection',
-        description: 'for being an awesome meerkat',
-        currency: 'gbp',
-        amount: amount * 100
-      });
-    }
-    e.preventDefault();
+        handler.open(
+        {
+          name: 'Zee\'s leaving collection',
+          description: 'for being an awesome meerkat',
+          currency: 'gbp',
+          amount: amount * 100
+        });
+      }
+      e.preventDefault();
+    });
   });
+
+
 
   // Close Checkout on page navigation:
   window.addEventListener('popstate', function()

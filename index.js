@@ -83,9 +83,7 @@ app.post("/charge", (req, res) => {
 app.listen(process.env.PORT, () => console.log('Farewell Zee listening on', process.env.PORT))
 
 process.on('SIGTERM', () => {
-  app.close().then( () => {
     db.close().then(() => {
       process.exit(0)
-    });
   });
 });
