@@ -14,7 +14,7 @@
   <div>
     <form id="input"
           method="POST"
-          target="/sumit">
+          target="/submit">
       <h1>Farewell Zee,</h1>
       <h2>thanks for being awesome!</h2>
       <div>
@@ -86,6 +86,7 @@
             })
         }
       });
+      return handler
     });
   }).then(handler =>
   {
@@ -106,8 +107,6 @@
       e.preventDefault();
     });
   });
-
-
 
   // Close Checkout on page navigation:
   window.addEventListener('popstate', function()
