@@ -55,7 +55,8 @@
   var handler
   fetch('/key').then(resp =>
   {
-    var key = resp.text();
+    var key = resp.text().then(value =>
+      return value);
     console.log("key", key);
     handler = StripeCheckout.configure(
     {
