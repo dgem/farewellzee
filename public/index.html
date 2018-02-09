@@ -44,41 +44,48 @@
               id="stripe-button">Submit
       </button>
     </form>
+    <div id="thanks"
+         class="hidden">
+      <h1>Thanks for being awesome too!</h1>
+    </div>
   </div>
 </body>
 
 <script>
-  var handler = StripeCheckout.configure(
+  var handler
+  fetch('/key').then(resp =>
   {
-    key: 'pk_test_hy0Ff5R7sslD3Yc1asip9xR5',
-    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-    locale: 'auto',
-    token: function(token)
+    var key = resp.text();
+    console.log("key", key);
+    handler = StripeCheckout.configure(
     {
-      token.metadata = {
-        from: document.getElementById('displayName').value,
-        message: document.getElementById('message').value
+      key: key,
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      locale: 'auto',
+      token: function(token)
+      {
+        token.metadata = {
+          from: document.getElementById('displayName').value,
+          message: document.getElementById('message').value
+        }
+        console.log(JSON.stringify(token));
+        fetch("/charge",
+          {
+            method: "POST",
+            headers:
+            {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(token)
+          })
+          .then(output =>
+          {
+            console.log(JSON.stringify(output));
+            document.getElementById("input").classList.toggle('hidden');
+            document.getElementById("thanks").classList.toggle('hidden');
+          })
       }
-      console.log(JSON.stringify(token));
-      fetch("/charge",
-        {
-          method: "POST",
-          headers:
-          {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(token)
-        })
-        .then(output =>
-        {
-          console.log(JSON.stringify(output));
-          if (output.status === "succeeded")
-          {
-            console.log(output);
-            document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
-          }
-        })
-    }
+    });
   });
 
   document.getElementById('giftAmount').value = document.getElementById("amount").value

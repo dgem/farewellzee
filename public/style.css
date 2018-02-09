@@ -14,7 +14,6 @@ h1, h2 {
 }
 
 form {
-  /* position: fixed; */
   width: 33%;
   background: rgba(0, 0, 0, .3);
   display: inline-block;
@@ -67,6 +66,15 @@ form button {
   border-radius: .5em;
   margin-bottom: 1.5em;
   margin-right: 1.5em;
+}
+
+#thanks {
+  font-size: x-large;
+  margin-top: 5em;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 350px) and (orientation: portrait) {

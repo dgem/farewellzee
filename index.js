@@ -43,7 +43,7 @@ app.use(express.static('public'));
 
 
 app.get('/key', (req, res) => {
-  send(stripePublicKey, 200)
+  res.send(stripePublicKey)
 })
 
 app.post("/charge", (req, res) => {
