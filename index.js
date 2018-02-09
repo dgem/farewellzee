@@ -7,6 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const app = express();
 
 app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
