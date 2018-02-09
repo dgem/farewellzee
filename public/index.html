@@ -67,6 +67,7 @@
           token.metadata = {
             from: document.getElementById('displayName').value,
             message: document.getElementById('message').value
+            amount: document.getElementById('amount').value * 100
           }
           console.log(JSON.stringify(token));
           fetch("/charge",

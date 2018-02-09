@@ -48,7 +48,7 @@ app.get('/key', (req, res) => {
 
 app.post("/charge", (req, res) => {
 
-  let amount = 500;
+  let amount = req.body.metadata.amount;
   console.log("req.body", JSON.stringify(req.body))
   stripe.customers.create({
       email: req.body.email,
